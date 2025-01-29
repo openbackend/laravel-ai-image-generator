@@ -1,11 +1,7 @@
 {
     "name": "rbb/ai-image-generator",
-    "description": "A Laravel package for AI-powered image generation using OpenAI DALL·E and Stable Diffusion.",
+    "description": "A Laravel package for AI-powered image generation using OpenAI DALL·E and Stable Diffusion",
     "type": "library",
-    "require": {
-        "guzzlehttp/guzzle": "^7.5",
-        "laravel/framework": "^10.0"
-    },
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -14,17 +10,9 @@
     },
     "authors": [
         {
-            "name": "Ramesh Baduwal"
+            "name": "rudraramesh",
+            "email": "baduwalramesh98@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/rudraramesh/ai-image-generator"
-        }
-    ],
-
-    "minimum-stability": "dev",
-    "prefer-stable": true
-
+    "require": {}
 }
