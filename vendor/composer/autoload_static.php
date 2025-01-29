@@ -76,7 +76,7 @@ class ComposerStaticInit1e741716858c34bea8248d26551e829f
         ),
         'R' => 
         array (
-            'Rudraramesh\\LaravelAiImageGenerator\\' => 36,
+            'Rbb\\AiImageGenerator\\' => 21,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -266,7 +266,7 @@ class ComposerStaticInit1e741716858c34bea8248d26551e829f
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
-        'Rudraramesh\\LaravelAiImageGenerator\\' => 
+        'Rbb\\AiImageGenerator\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
@@ -288,8 +288,8 @@ class ComposerStaticInit1e741716858c34bea8248d26551e829f
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
