@@ -14,5 +14,8 @@
             "email": "baduwalramesh98@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "^7.5",
+        "laravel/framework": "^9.0 || ^10.0"
+    }
 }
