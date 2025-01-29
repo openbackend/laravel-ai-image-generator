@@ -17,5 +17,12 @@
             "name": "Ramesh Baduwal"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/rudraramesh/ai-image-generator"
+        }
+    ],
+
     "minimum-stability": "stable"
 }
