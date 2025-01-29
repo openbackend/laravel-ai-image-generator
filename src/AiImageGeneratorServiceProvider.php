@@ -1,10 +1,10 @@
 <?php
 
-namespace Rudraramesh\LaravelAiImageGenerator;
+namespace Rbb\AiImageGenerator;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelAiImageGeneratorServiceProvider extends ServiceProvider
+class AiImageGeneratorServiceProvider extends ServiceProvider
 {
     public function register()
     {

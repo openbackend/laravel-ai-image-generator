@@ -1,5 +1,5 @@
 {
-    "name": "rudraramesh/ai-image-generator",
+    "name": "rbb/ai-image-generator",
     "description": "A Laravel package for AI-powered image generation using OpenAI DALL·E and Stable Diffusion.",
     "type": "library",
     "require": {
@@ -9,7 +9,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Rudraramesh\\LaravelAiImageGenerator\\": "src/"
+            "Rbb\\LaravelAiImageGenerator\\": "src/"
         }
     },
     "authors": [
@@ -24,5 +24,7 @@
         }
     ],
 
-    "minimum-stability": "stable"
+    "minimum-stability": "dev",
+    "prefer-stable": true
+
 }

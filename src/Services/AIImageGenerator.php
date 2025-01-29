@@ -1,6 +1,6 @@
 <?php
 
-namespace Rudraramesh\LaravelAiImageGenerator\Services;
+namespace Rbb\AiImageGenerator\Services;
 
 use GuzzleHttp\Client;
 
