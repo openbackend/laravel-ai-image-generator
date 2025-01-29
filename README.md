@@ -6,7 +6,7 @@ A Laravel package for AI-powered image generation using OpenAI DALL·E and Stabl
 
 1. Add the package to your Laravel project:
    ```bash
-   composer require rbb/ai-image-generator
+   composer require rudraramesh/ai-image-generator
 
 2. Publish Configuration
    ```bash
