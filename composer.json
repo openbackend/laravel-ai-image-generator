@@ -1,5 +1,5 @@
 {
-    "name": "rudraramesh/laravel-ai-image-generator",
+    "name": "rudraramesh/ai-image-generator",
     "description": "A Laravel package for AI-powered image generation using OpenAI DALL·E and Stable Diffusion.",
     "type": "library",
     "require": {
