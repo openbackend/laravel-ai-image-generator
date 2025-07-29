@@ -10,6 +10,7 @@ use OpenBackend\AiImageGenerator\Exceptions\ConfigurationException;
 use OpenBackend\AiImageGenerator\Exceptions\RateLimitException;
 use OpenBackend\AiImageGenerator\Models\GeneratedImage;
 use OpenBackend\AiImageGenerator\Providers\OpenAIProvider;
+use OpenBackend\AiImageGenerator\Providers\StabilityProvider;
 
 /**
  * Main AI Image Generator Service
@@ -225,7 +226,7 @@ class AIImageGenerator
 
         return match ($config['driver'] ?? $provider) {
             'openai' => new OpenAIProvider($config),
-            // 'stability' => new StabilityProvider($config),
+            'stability' => new StabilityProvider($config),
             // 'midjourney' => new MidjourneyProvider($config),
             default => throw new ConfigurationException("Unsupported provider driver: {$provider}")
         };
