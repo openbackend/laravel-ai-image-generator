@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/packagist/l/openbackend/laravel-ai-image-generator?style=flat-square)](https://packagist.org/packages/openbackend/laravel-ai-image-generator)
 
 An advanced Laravel package for AI-powered image generation supporting multiple providers including OpenAI DALL-E, Stability AI, and Midjourney. Generate stunning images from text prompts with comprehensive features like automatic storage, thumbnails, rate limiting, and detailed analytics.
-
+,
 ## Features
 
 - 🎨 **Multiple AI Providers**: OpenAI DALL-E, Stability AI, Midjourney support
@@ -130,18 +130,6 @@ composer test-coverage
 composer analyse
 ```
 
-## Credits
-
-- [OpenBackend Organization](https://github.com/openbackend)
-- [Rudra Ramesh](https://github.com/rudraramesh) - Lead Developer
-- [All Contributors](../../contributors)
-
-## About OpenBackend
-
-OpenBackend is an open-source organization focused on creating high-quality backend solutions and packages for modern web development. We specialize in Laravel packages, API development tools, and backend infrastructure solutions.
-
-Visit us at [OpenBackend.org](https://openbackend.org) to explore more of our projects.
-
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
@@ -151,4 +139,3 @@ The MIT License (MIT). Please see [License File](LICENSE) for more information.
 - 📧 Email: contact@rameshbaduwal.com.np
 - 🐛 Issues: [GitHub Issues](https://github.com/openbackend/laravel-ai-image-generator/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/openbackend/laravel-ai-image-generator/discussions)
-- 🌐 Website: [OpenBackend.org](https://openbackend.org)

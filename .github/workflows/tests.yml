@@ -1,0 +1,79 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php-version: ['8.1', '8.2', '8.3']
+        laravel-version: ['9.*', '10.*', '11.*']
+        exclude:
+          - php-version: '8.1'
+            laravel-version: '11.*'
+
+    name: PHP ${{ matrix.php-version }} - Laravel ${{ matrix.laravel-version }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-version }}
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd, redis, memcached
+        coverage: xdebug
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.composer/cache/files
+        key: dependencies-laravel-${{ matrix.laravel-version }}-php-${{ matrix.php-version }}-composer-${{ hashFiles('composer.json') }}
+
+    - name: Install dependencies
+      run: |
+        composer require "laravel/framework:${{ matrix.laravel-version }}" --no-interaction --no-update
+        composer update --prefer-dist --no-interaction
+
+    - name: Create database
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+
+    - name: Execute tests
+      run: vendor/bin/phpunit
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      if: matrix.php-version == '8.2' && matrix.laravel-version == '10.*'
+      with:
+        file: ./build/logs/clover.xml
+        fail_ci_if_error: false
+
+  static-analysis:
+    runs-on: ubuntu-latest
+    name: Static Analysis
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.2
+        extensions: dom, curl, libxml, mbstring, zip
+        coverage: none
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-interaction
+
+    - name: Run PHPStan
+      run: vendor/bin/phpstan analyse --memory-limit=2G
