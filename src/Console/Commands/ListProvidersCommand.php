@@ -20,24 +20,26 @@ class ListProvidersCommand extends Command
     /**
      * Execute the console command.
      */
-    public function handle(AIImageGenerator $generator): int
+    public function handle()
     {
-        $this->info('Available AI Image Providers:');
-        $this->newLine();
-
+        $generator = app(AIImageGenerator::class);
         $providers = $generator->getProviders();
+
+        $this->info('Available AI Image Providers:');
+        $this->line('');
+
         $tableData = [];
 
         foreach ($providers as $providerName) {
             try {
-                $provider = $generator->provider($providerName);
                 $config = $generator->getProviderConfig($providerName);
+                $providerInstance = $generator->getProviderInstance($providerName);
                 
                 $tableData[] = [
                     'name' => $providerName,
                     'driver' => $config['driver'] ?? $providerName,
-                    'status' => $provider->isAvailable() ? '✅ Available' : '❌ Not configured',
-                    'models' => implode(', ', $provider->getSupportedModels()),
+                    'status' => $providerInstance->isAvailable() ? '✅ Available' : '❌ Not configured',
+                    'models' => implode(', ', $providerInstance->getSupportedModels()),
                 ];
                 
             } catch (\Exception $e) {

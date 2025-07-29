@@ -37,6 +37,18 @@ class AIImageGenerator
     }
 
     /**
+     * Get the current provider instance
+     */
+    public function getProviderInstance(string $provider = null): AIImageProviderInterface
+    {
+        if ($provider) {
+            return $this->createProvider($provider);
+        }
+        
+        return $this->provider ?? $this->createProvider($this->defaultProvider);
+    }
+
+    /**
      * Generate an image from a prompt
      */
     public function generate(string $prompt, array $options = []): GeneratedImage
