@@ -10,7 +10,7 @@ Please **do not** create public issues for security vulnerabilities.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 1.0.x   | ✅ Yes             |
+| 1.0.1   | ✅ Yes             |
 | < 1.0   | ❌ No              |
 
 ## Security Best Practices
