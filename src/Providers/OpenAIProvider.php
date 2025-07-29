@@ -5,6 +5,7 @@ namespace OpenBackend\AiImageGenerator\Providers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use OpenBackend\AiImageGenerator\Contracts\AIImageProviderInterface;
 use OpenBackend\AiImageGenerator\Exceptions\APIException;
 use OpenBackend\AiImageGenerator\Exceptions\ConfigurationException;
@@ -24,7 +25,7 @@ class OpenAIProvider implements AIImageProviderInterface
         $this->config = $config;
         $this->client = new Client([
             'timeout' => $config['timeout'] ?? 120,
-            'base_uri' => $config['api_url'] ?? 'https://api.openai.com/v1',
+            'base_uri' => rtrim($config['api_url'] ?? 'https://api.openai.com/v1', '/') . '/',
         ]);
 
         if (empty($config['api_key'])) {
@@ -191,7 +192,7 @@ class OpenAIProvider implements AIImageProviderInterface
         }
 
         try {
-            $response = $this->client->post('/images/generations', [
+            $response = $this->client->post('images/generations', [
                 'headers' => [
                     'Authorization' => 'Bearer ' . $this->config['api_key'],
                     'Content-Type' => 'application/json',
@@ -205,6 +206,12 @@ class OpenAIProvider implements AIImageProviderInterface
             $statusCode = $e->getResponse() ? $e->getResponse()->getStatusCode() : 0;
             $responseBody = $e->getResponse() ? $e->getResponse()->getBody()->getContents() : '';
             
+            // Parse error response if available
+            $errorData = null;
+            if ($responseBody) {
+                $errorData = json_decode($responseBody, true);
+            }
+            
             // Provide more helpful error messages
             $errorMessage = 'OpenAI API request failed: ';
             
@@ -215,15 +222,37 @@ class OpenAIProvider implements AIImageProviderInterface
             } elseif ($statusCode === 429) {
                 $errorMessage = 'OpenAI API rate limit exceeded. Please try again later.';
             } elseif ($statusCode === 400) {
-                $errorMessage = 'Invalid request to OpenAI API. Please check your prompt and options.';
+                if ($errorData && isset($errorData['error']['code'])) {
+                    $errorCode = $errorData['error']['code'];
+                    $errorMsg = $errorData['error']['message'] ?? 'Invalid request';
+                    
+                    if ($errorCode === 'billing_hard_limit_reached') {
+                        $errorMessage = 'OpenAI billing limit reached. Please add credits to your OpenAI account or check your billing settings.';
+                    } elseif ($errorCode === 'insufficient_quota') {
+                        $errorMessage = 'OpenAI quota exceeded. Please check your API usage limits or upgrade your plan.';
+                    } elseif ($errorCode === 'content_policy_violation') {
+                        $errorMessage = 'Content policy violation. Please modify your prompt to comply with OpenAI\'s usage policies.';
+                    } else {
+                        $errorMessage = "OpenAI API error ($errorCode): $errorMsg";
+                    }
+                } else {
+                    $errorMessage = 'Invalid request to OpenAI API. Please check your prompt and options.';
+                }
             } else {
                 $errorMessage .= $e->getMessage();
             }
+
+            Log::error('OpenAI API request failed', [
+                'status_code' => $statusCode,
+                'error_data' => $errorData,
+                'response_body' => $responseBody,
+                'request_payload' => $payload,
+            ]);
             
             throw new APIException(
                 $errorMessage,
                 $statusCode,
-                json_decode($responseBody, true) ?: []
+                $errorData ?: []
             );
         }
     }
@@ -250,7 +279,7 @@ class OpenAIProvider implements AIImageProviderInterface
             $filePath = $storagePath . '/' . $fileName;
 
             $disk = config('aiimagegenerator.storage.disk', 'public');
-            \Storage::disk($disk)->put($filePath, $imageContent);
+            Storage::disk($disk)->put($filePath, $imageContent);
 
             $generation->update([
                 'file_path' => $filePath,
