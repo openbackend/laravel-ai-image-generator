@@ -153,7 +153,12 @@ class OpenAIProvider implements AIImageProviderInterface
 
     public function isAvailable(): bool
     {
-        return !empty($this->config['api_key']);
+        $apiKey = $this->config['api_key'] ?? '';
+        
+        // Check if API key exists and is not a placeholder
+        return !empty($apiKey) && 
+               $apiKey !== 'your-openai-api-key-here' && 
+               strlen($apiKey) > 20; // OpenAI API keys are longer than 20 chars
     }
 
     protected function makeRequest(string $prompt, array $options): array
@@ -190,8 +195,23 @@ class OpenAIProvider implements AIImageProviderInterface
             $statusCode = $e->getResponse() ? $e->getResponse()->getStatusCode() : 0;
             $responseBody = $e->getResponse() ? $e->getResponse()->getBody()->getContents() : '';
             
+            // Provide more helpful error messages
+            $errorMessage = 'OpenAI API request failed: ';
+            
+            if ($statusCode === 401) {
+                $errorMessage = 'Invalid OpenAI API key. Please check your API key configuration.';
+            } elseif ($statusCode === 404) {
+                $errorMessage = 'OpenAI API endpoint not found. This might indicate an invalid API key or deprecated endpoint.';
+            } elseif ($statusCode === 429) {
+                $errorMessage = 'OpenAI API rate limit exceeded. Please try again later.';
+            } elseif ($statusCode === 400) {
+                $errorMessage = 'Invalid request to OpenAI API. Please check your prompt and options.';
+            } else {
+                $errorMessage .= $e->getMessage();
+            }
+            
             throw new APIException(
-                'OpenAI API request failed: ' . $e->getMessage(),
+                $errorMessage,
                 $statusCode,
                 json_decode($responseBody, true) ?: []
             );

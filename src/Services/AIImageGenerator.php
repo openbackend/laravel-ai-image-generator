@@ -29,7 +29,7 @@ class AIImageGenerator
     /**
      * Set the AI provider to use
      */
-    public function provider(string $provider = null): self
+    public function provider(?string $provider = null): self
     {
         $providerName = $provider ?? $this->defaultProvider;
         $this->provider = $this->createProvider($providerName);
@@ -39,7 +39,7 @@ class AIImageGenerator
     /**
      * Get the current provider instance
      */
-    public function getProviderInstance(string $provider = null): AIImageProviderInterface
+    public function getProviderInstance(?string $provider = null): AIImageProviderInterface
     {
         if ($provider) {
             return $this->createProvider($provider);
@@ -122,9 +122,9 @@ class AIImageGenerator
     }
 
     /**
-     * Get supported sizes for current or specified provider
+     * Get supported image sizes for a provider
      */
-    public function getSupportedSizes(string $provider = null): array
+    public function getSupportedSizes(?string $provider = null): array
     {
         $providerInstance = $provider 
             ? $this->createProvider($provider)
