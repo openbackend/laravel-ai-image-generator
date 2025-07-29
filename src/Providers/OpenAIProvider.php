@@ -156,9 +156,19 @@ class OpenAIProvider implements AIImageProviderInterface
         $apiKey = $this->config['api_key'] ?? '';
         
         // Check if API key exists and is not a placeholder
-        return !empty($apiKey) && 
-               $apiKey !== 'your-openai-api-key-here' && 
-               strlen($apiKey) > 20; // OpenAI API keys are longer than 20 chars
+        $placeholders = [
+            'your-openai-api-key-here',
+            'test-key-for-development',
+            'sk-test',
+            'sk-fake'
+        ];
+        
+        if (empty($apiKey) || in_array($apiKey, $placeholders)) {
+            return false;
+        }
+        
+        // Real OpenAI API keys start with 'sk-' and are much longer
+        return str_starts_with($apiKey, 'sk-') && strlen($apiKey) > 40;
     }
 
     protected function makeRequest(string $prompt, array $options): array
