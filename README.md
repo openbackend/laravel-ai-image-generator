@@ -140,7 +140,7 @@ composer analyse
 
 OpenBackend is an open-source organization focused on creating high-quality backend solutions and packages for modern web development. We specialize in Laravel packages, API development tools, and backend infrastructure solutions.
 
-Visit us at [OpenBackend.org](https://openbackend.org) to explore more of our projects.
+Visit us at [openbackend.dev](https://openbackend.dev) to explore more of our projects.
 
 ## License
 
@@ -148,7 +148,7 @@ The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
 ## Support
 
-- 📧 Email: contact@rameshbaduwal.com.np
+- 📧 Email: contact@openbackend.dev
 - 🐛 Issues: [GitHub Issues](https://github.com/openbackend/laravel-ai-image-generator/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/openbackend/laravel-ai-image-generator/discussions)
-- 🌐 Website: [OpenBackend.org](https://openbackend.org)
+- 🌐 Website: [openbackend.dev](https://openbackend.dev)

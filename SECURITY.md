@@ -2,7 +2,7 @@
 
 ## Reporting Security Vulnerabilities
 
-We take security seriously. If you discover a security vulnerability within this package, please send an email to security@rameshbaduwal.com.np. All security vulnerabilities will be promptly addressed.
+We take security seriously. If you discover a security vulnerability within this package, please send an email to security@openbackend.dev. All security vulnerabilities will be promptly addressed.
 
 Please **do not** create public issues for security vulnerabilities.
 
@@ -39,7 +39,7 @@ This package includes several security features:
 
 If you find a security issue:
 
-1. Email the details to security@rameshbaduwal.com.np
+1. Email the details to security@openbackend.dev
 2. Provide a clear description of the vulnerability
 3. Include steps to reproduce if possible
 4. Allow reasonable time for the issue to be addressed

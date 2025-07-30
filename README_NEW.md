@@ -136,6 +136,6 @@ The MIT License (MIT). Please see [License File](LICENSE) for more information.
 
 ## Support
 
-- 📧 Email: contact@rameshbaduwal.com.np
+- 📧 Email: contact@openbackend.dev
 - 🐛 Issues: [GitHub Issues](https://github.com/openbackend/laravel-ai-image-generator/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/openbackend/laravel-ai-image-generator/discussions)

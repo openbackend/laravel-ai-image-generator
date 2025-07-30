@@ -12,13 +12,14 @@
     "authors": [
         {
             "name": "OpenBackend",
-            "email": "contact@rameshbaduwal.com.np",
-            "homepage": "https://openbackend.org",
+            "email": "contact@openbackend.dev",
+            "homepage": "https://openbackend.dev",
             "role": "Organization"
         },
         {
             "name": "Rudra Ramesh",
-            "email": "baduwalramesh98@gmail.com",
+            "email": "rudra@openbackend.dev",
+            "homepage": "https://rameshbaduwal.com.np",
             "role": "Lead Developer"
         }
     ],
